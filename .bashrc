@@ -135,6 +135,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# custom colored prompt format
+# [hh:mm] host:usericon. Red # if root, else green $.
 if [ "$PS1" ]; then
 	if [[ $UID -eq 0 ]]; then 
 		#is root

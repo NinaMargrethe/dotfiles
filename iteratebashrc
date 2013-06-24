@@ -1,0 +1,80 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=ignoredups
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+# Colors
+DULL=0 BRIGHT=1
+FG_BLACK=30 FG_RED=31 FG_GREEN=32 FG_YELLOW=33 FG_BLUE=34
+FG_VIOLET=35 FG_CYAN=36 FG_WHITE=37 FG_NULL=00
+BG_BLACK=40 BG_RED=41 BG_GREEN=42 BG_YELLOW=43 BG_BLUE=44
+BG_VIOLET=45 BG_CYAN=46 BG_WHITE=47 BG_NULL=00
+RED="\[\033[${DULL};${FG_RED}m\]"
+GREEN="\[\033[${DULL};${FG_GREEN}m\]"
+YELLOW="\[\033[${DULL};${FG_YELLOW}m\]"
+NULL="\[\033[m\]"
+
+# Window title
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
+
+# Set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Prompt
+if [ "$USER" == "root" ]; then
+    PS1COLOR=$RED
+    ENDSIGN="#"
+else
+    PS1COLOR=$GREEN
+    ENDSIGN="\$"
+fi
+CHROOT='${debian_chroot:+($debian_chroot)}'
+UAHP="${PS1COLOR}\u@\h:\w"
+GITPS1='$(__git_ps1 ":%s")'
+GIT="${YELLOW}${GITPS1}"
+END="${PS1COLOR}${ENDSIGN}${NULL}"
+export PS1="${CHROOT}${UAHP}${GIT}${END} "
+
+# Default editor
+export EDITOR="vim"
+
+# Environment
+if [ -d ~/.m2/repository/ ]; then
+    export M2_REPO=~/.m2/repository/
+fi
+
+# Alias definitions
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+fi
+alias ll='ls -hal'
+alias l='ls'
+
+# Path
+if [ -d ~/bin ]; then
+    PATH=~/bin:${PATH}
+fi
+
+# Bash completions
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi

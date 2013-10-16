@@ -120,13 +120,18 @@ if ! shopt -oq posix; then
 fi
 
 # custom colored prompt format
-# [hh:mm] host:usericon. Red # if root, else green $.
+# [hh:mm] host:usericon. Red # if root, else green $.i
+DULL=0  BRIGHT=1 FG_YELLOW=43
+YELLOW="\[\033[${BRIGHT};${FG_YELLOW}m\]" 
+GITPS1='$(__git_ps1 ":%s")' 
+GIT="${YELLOW}${GITPS1}" 
+
 if [ "$PS1" ]; then
 	if [[ $UID -eq 0 ]]; then 
 		#is root
-		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;31m# \e[m\] "
+		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;31m# \e[m\]\e[1;33m[${GIT}]"
 	else
-		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;32m$ \e[m\] "
+		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;32m$ \e[m\]\e[1;33m\e[1;33m[${GIT}] "
 	fi
 	export PS1
 fi

@@ -31,7 +31,7 @@ let &colorcolumn=join(range(81,999),",")
 " hilight ColorColumn ctermbg=235 guibg=#2c2d27 "broken
 "let &colorcolumn="80,".join(range(82,999),",")
 let &colorcolumn="80,".join(range(998,999),",")
-
+vim tw=80
 "set textwidth=79
 
 " Uncomment the following to have Vim jump to the last position when

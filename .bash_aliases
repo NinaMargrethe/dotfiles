@@ -11,10 +11,13 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF' 
 
-alias grep='grep --color=auto'
-alias ls='ls --color'
+alias grep='grep -in --color=auto'
 alias catclip='xclip -selection -c'
 alias ahoy='sails lift'
 alias rebash='source ~/.bashrc'
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\// /g' -e 's/^/ /'"
 alias startx="startx /usr/bin/gnome-session-fallback"
+alias rmregistry="/usr/local/java/jdk1.7.0_45/bin/rmiregistry"
+alias ggrep='git grep -in'
+alias dbmongo='mongod --dbpath=/data --port 27017 --rest'
+alias mongonuke="mongo --quiet --eval 'db.getMongo().getDBNames().forEach(function(i){db.getSiblingDB(i).dropDatabase()})'"

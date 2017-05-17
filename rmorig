@@ -1,0 +1,21 @@
+basedir="/c/Users/$(whoami)"
+file="$basedir/Documents/origs.txt"
+
+find . -name "*.orig" > $file 
+lines=$(wc -l < $file)
+echo "Found $lines orig files"
+
+while read orig; do
+    echo "Removing -f $orig"
+    rm -f $orig
+done<$file
+
+find . -name "*.orig" > $file
+lines=$(wc -l < $file)
+
+if(($lines == 0)); then 
+    echo "Deleted all orig files"
+    rm -f $file
+else
+    echo "Remaining $lines orig files in project"
+fi

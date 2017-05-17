@@ -133,7 +133,8 @@ if [ "$PS1" ]; then
 		#is root
 		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;31m#\e[m \e[1;33m${GIT}\e[m "
 	else
-		PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;32m$\e[m \e[1;33m\e[1;33m${GIT}\e[m "
+		#PS1="\[\e[0;36m[$(date +%H:%M)] \h:\e[m\]\[\e[1;32m$\e[m \e[1;33m\e[1;33m${GIT}\e[m "
+		PS1="\[\e[0;36m[$\T] \h:\e[m\]\[\e[1;32m$\e[m \e[1;33m\e[1;33m${GIT}\e[m "
 	fi
 	export PS1
 fi

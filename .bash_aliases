@@ -11,10 +11,15 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF' 
 
+if [ -f ~/.bashrc ]; then
+	alias rebash='source ~/.bashrc'
+elif [ -f ~/.bash_profile ]; then
+	alias rebash='source ~/.bash_profile'
+fi
+
 alias grep='grep -in --color=auto'
 alias catclip='xclip -selection -c'
 alias ahoy='sails lift'
-alias rebash='source ~/.bashrc'
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\// /g' -e 's/^/ /'"
 alias startx="startx /usr/bin/gnome-session-fallback"
 alias rmregistry="/usr/local/java/jdk1.7.0_45/bin/rmiregistry"

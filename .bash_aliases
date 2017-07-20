@@ -29,7 +29,5 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Git aliases
 alias ggrep='git grep -in'
-function grm(){
-	git branch -D "$1";
-	git branch -rD "$1";
-}
+## Deletes multiple branches from local and remote
+alias grm='f(){ git branch -D "$@"; git branch -rD "$@"; }'

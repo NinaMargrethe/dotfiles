@@ -1,5 +1,14 @@
-basedir="/c/Users/$(whoami)"
+if [[ "$OSTYPE" == "darwin"* ]]; then #MacOS
+	basedir="/Users/$(whoami)"	
+elif [[ "$OSTYPE" == "msys" ]]; then #Windows
+	basedir="/c/Users/$(whoami)"
+fi
+
 file="$basedir/Documents/origs.txt"
+
+if ![ -f $file]; then
+	touch $file
+fi
 
 find . -name "*.orig" > $file 
 lines=$(wc -l < $file)

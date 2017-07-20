@@ -23,7 +23,13 @@ alias ahoy='sails lift'
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\// /g' -e 's/^/ /'"
 alias startx="startx /usr/bin/gnome-session-fallback"
 alias rmregistry="/usr/local/java/jdk1.7.0_45/bin/rmiregistry"
-alias ggrep='git grep -in'
 alias dbmongo='mongod --dbpath=/data --port 27017 --rest'
 alias mongonuke="mongo --quiet --eval 'db.getMongo().getDBNames().forEach(function(i){db.getSiblingDB(i).dropDatabase()})'"
 alias incognito="/opt/google/chrome/chrome --incognito"
+
+# Git aliases
+alias ggrep='git grep -in'
+grm(){
+	git branch -D "$1";
+	git branch -rD "$1";
+}

@@ -29,7 +29,7 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Git aliases
 alias ggrep='git grep -in'
-grm(){
+function grm(){
 	git branch -D "$1";
 	git branch -rD "$1";
 }

@@ -31,5 +31,5 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 alias ggrep='git grep -in'
 alias gtree='git log --oneline --decorate --all --graph'
 ## Deletes multiple branches from local and remote
-deleteBranch(){ git branch -D $1; git branch -rD origin/$1; };
+deleteBranch(){ git branch -D $1; git push origin --delete $1; };
 alias grm=deleteBranch

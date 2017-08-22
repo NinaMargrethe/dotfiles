@@ -29,8 +29,12 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Git aliases
 alias ggrep='git grep -in'
-alias gtree='git log --oneline --decorate --all --graph'
+#alias gtree='git log --oneline --decorate --all --graph'
+alias gtree='git log --oneline --decorate --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)"'
 ## Deletes multiple branches from local and remote
 deleteBranch(){ git branch -D $1; git push origin --delete $1; };
 alias grm=deleteBranch
 alias fixpush='git config --global push.default current' #ffs.. -.-
+## Reverts to commit and updates remote branch
+regretPush(){ git reset --hard $1; git push -f; };
+alias gregret=regretPush

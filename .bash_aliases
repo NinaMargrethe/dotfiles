@@ -38,3 +38,4 @@ alias fixpush='git config --global push.default current' #ffs.. -.-
 ## Reverts to commit and updates remote branch
 regretPush(){ git reset --hard $1; git push -f; };
 alias gregret=regretPush
+alias noTunes='sudo chmod 777 /Applications/iTunes.app; sudo rm -r /Applications/iTunes.app/'

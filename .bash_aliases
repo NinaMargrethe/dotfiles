@@ -24,6 +24,8 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Mac aliases
 alias noTunes='sudo chmod 777 /Applications/iTunes.app; sudo rm -r /Applications/iTunes.app/'
+## Gatekeeper (sec&priv) shows option allow apps downloaded from anywhere
+alias openAnywhere='sudo spctl --master-disable'
 
 # Dev aliases
 alias ahoy='sails lift'

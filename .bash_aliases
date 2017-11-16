@@ -61,4 +61,5 @@ gclone(){
 	fi	
 }
 alias gclone=gclone
-
+#TODO: port git diff --name-only sha1 sha2 to optional current vs sha
+#:$ (master) git diff --name-only master develop

@@ -28,6 +28,10 @@ alias noTunes='sudo chmod 777 /Applications/iTunes.app; sudo rm -r /Applications
 alias openAnywhere='sudo spctl --master-disable'
 alias showHiddenFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias hideHiddenFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
+showWifiPW(){
+	security find-generic-password -w $1;
+}
+alias showWifiPassword=showWifiPW
 
 # Dev aliases
 alias ahoy='sails lift'

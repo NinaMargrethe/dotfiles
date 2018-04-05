@@ -48,6 +48,17 @@ alias gtree='git log --oneline --decorate --all --graph --format=format:"%C(bold
 ## Deletes multiple branches from local and remote
 deleteBranch(){ git branch -D $1; git push origin --delete $1; };
 alias grm=deleteBranch
+## Deletes local branches merged to develop
+deleteLocalBranchesMerged(){
+	branches=$(git branch --merged develop)
+	for branch in $branches; do
+		if [[ $branch != 'develop' && $branch != 'master' ]]; then 
+			echo "Deleting branch $branch" #TODO: For some reason this prints more than just branches
+			#git branch -D $branch
+		fi
+	done
+}
+alias grm2=deleteLocalBranchesMerged
 alias fixpush='git config --global push.default current' #ffs.. -.-
 ## Reverts to commit and updates remote branch
 regretPush(){ git reset --hard $1; git push -f; };

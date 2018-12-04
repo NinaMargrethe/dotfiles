@@ -60,7 +60,7 @@ deleteLocalBranchesMerged(){
 }
 alias grm2=deleteLocalBranchesMerged
 alias fixpush='git config --global push.default current'
-alias fixpull='git branch --set-upstream-to=origin/$(git branch | grep \* | cut -d ' ' -f2)'
+alias fixpull='git branch --set-upstream-to=origin/$(git branch | grep \* | cut -d " " -f2)'
 ## Reverts to commit and updates remote branch
 regretPush(){ git reset --hard $1; git push -f; };
 alias gregret=regretPush

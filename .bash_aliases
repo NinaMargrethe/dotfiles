@@ -59,7 +59,8 @@ deleteLocalBranchesMerged(){
 	done
 }
 alias grm2=deleteLocalBranchesMerged
-alias fixpush='git config --global push.default current' #ffs.. -.-
+alias fixpush='git config --global push.default current'
+alias fixpull='git branch --set-upstream-to=origin/$(git branch | grep \* | cut -d ' ' -f2)'
 ## Reverts to commit and updates remote branch
 regretPush(){ git reset --hard $1; git push -f; };
 alias gregret=regretPush
@@ -80,3 +81,7 @@ gclone(){
 alias gclone=gclone
 #TODO: port git diff --name-only sha1 sha2 to optional current vs sha
 #:$ (master) git diff --name-only master develop
+locallog(){
+	branch=$(git name-rev --name-only HEAD)
+	git log origin/$branch..HEAD
+}

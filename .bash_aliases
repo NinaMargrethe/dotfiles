@@ -1,5 +1,12 @@
 #!/bin/bash/
 
+# Find OS Type
+isMacOS(){
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		echo 1
+	fi
+}
+
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
 	 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -23,6 +30,20 @@ alias startx="startx /usr/bin/gnome-session-fallback"
 alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Mac aliases
+isBrewInstalled(){
+	if [ $(isMacOS) -eq 1 ]; then # Is OSX System
+		if brew ls --versions $1 > /dev/null; then
+			# The package is installed, alias it, continue
+			return 1
+		else
+		    # The package is not installed
+			echo "Homebrew: $1 package missing. Install and run again."
+			return 0
+		fi
+	fi
+}
+	if [[ $(isBrewInstalled 'gnu-sed') -eq 1 ]]; then alias sed=gsed; fi
+
 alias noTunes='sudo chmod 777 /Applications/iTunes.app; sudo rm -r /Applications/iTunes.app/'
 ## Gatekeeper (sec&priv) shows option allow apps downloaded from anywhere
 alias openAnywhere='sudo spctl --master-disable'
@@ -85,3 +106,24 @@ locallog(){
 	branch=$(git name-rev --name-only HEAD)
 	git log origin/$branch..HEAD
 }
+recursiveStash(){
+	# On OSX this requires the install of gnu-sed. Abort if not found
+	if [[ $(isBrewInstalled 'gnu-sed') -eq 0 ]]; then return; fi 
+
+	file=/tmp/recursiveStashTmp
+	file2=/tmp/recursiveStash
+	if [ ! -f $file ]; then touch $file; fi
+	if [ ! -f $file2 ]; then touch $file2; fi
+
+	echo $(git stash list) > $file
+	sed -e 's/ stash@{/ \\\n&/g' $file >> $file2
+
+	i=0
+	for line in $(cat $file2); do
+		echo $line
+		git stash show stash@{$i}
+		i=$i+1
+	done
+	rm $file $file2
+}
+alias rstash=recursiveStash

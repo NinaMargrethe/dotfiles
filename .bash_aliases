@@ -31,18 +31,17 @@ alias incognito="/opt/google/chrome/chrome --incognito"
 
 # Mac aliases
 isBrewInstalled(){
-	if [ $(isMacOS) -eq 1 ]; then # Is OSX System
+	if [[ $(isMacOS) -eq 1 ]]; then # Is OSX System
 		if brew ls --versions $1 > /dev/null; then
 			# The package is installed, alias it, continue
-			return 1
+			echo 1
 		else
 		    # The package is not installed
 			echo "Homebrew: $1 package missing. Install and run again."
-			return 0
 		fi
 	fi
 }
-	if [[ $(isBrewInstalled 'gnu-sed') -eq 1 ]]; then alias sed=gsed; fi
+if [[ $(isBrewInstalled 'gnu-sed') -eq 1 ]]; then alias sed=gsed; fi
 
 alias noTunes='sudo chmod 777 /Applications/iTunes.app; sudo rm -r /Applications/iTunes.app/'
 ## Gatekeeper (sec&priv) shows option allow apps downloaded from anywhere
@@ -108,7 +107,10 @@ locallog(){
 }
 recursiveStash(){
 	# On OSX this requires the install of gnu-sed. Abort if not found
-	if [[ $(isBrewInstalled 'gnu-sed') -eq 0 ]]; then return; fi 
+	if [[ $(isBrewInstalled 'foobar') -ne 1 ]]; then 
+		echo $(isBrewInstalled 'foobar')
+		exit 1 
+	fi
 
 	file=/tmp/recursiveStashTmp
 	file2=/tmp/recursiveStash
@@ -116,14 +118,16 @@ recursiveStash(){
 	if [ ! -f $file2 ]; then touch $file2; fi
 
 	echo $(git stash list) > $file
-	sed -e 's/ stash@{/ \\\n&/g' $file >> $file2
+		sed -e 's/ stash@{/ \n&/g' $file >> $file2
 
 	i=0
-	for line in $(cat $file2); do
+	#for line in $(cat $file2); do
+	while read line; do
 		echo $line
 		git stash show stash@{$i}
+		echo $'\n'
 		i=$i+1
-	done
+	done < $file2
 	rm $file $file2
 }
 alias rstash=recursiveStash

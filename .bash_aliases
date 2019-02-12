@@ -113,22 +113,18 @@ recursiveStash(){
 		exit 1 
 	fi
 
-	file=/tmp/recursiveStashTmp
-	file2=/tmp/recursiveStash
-	if [ ! -f $file ]; then touch $file; fi
-	if [ ! -f $file2 ]; then touch $file2; fi
-
+	file=/tmp/recursiveStash
 	echo $(git stash list) > $file
-		sed -e 's/ stash@{/ \n&/g' $file >> $file2
+	sed -i -e 's/\( \)\(stash@{\)/\n\2/g' $file
+	#TODO: Coloring output
+	#sed -i -e 's/\(: \)\([a-zA-Z0-9]\{9\}\)/\1\[\e[0;33\2\[\033[00m\]/g' $file
 
 	i=0
-	#for line in $(cat $file2); do
 	while read line; do
 		echo $line
 		git stash show stash@{$i}
 		echo $'\n'
 		i=$i+1
-	done < $file2
-	rm $file $file2
+	done < $file
 }
 alias rstash=recursiveStash

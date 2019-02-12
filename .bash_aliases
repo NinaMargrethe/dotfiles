@@ -23,6 +23,7 @@ fi
 # General aliases
 alias grep='grep -in --color=auto'
 alias catclip='xclip -selection -c'
+alias asciirainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
 
 # Linux aliases
 alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\// /g' -e 's/^/ /'"

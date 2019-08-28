@@ -128,3 +128,10 @@ recursiveStash(){
 	done < $file
 }
 alias rstash=recursiveStash
+## push current to remote with other name, specifying just the remote branch name
+pushDifferent(){
+	remote=$1
+	current=$(git branch | grep \* | cut -d " " -f2)
+	git push origin $current:$remote
+}
+alias pushDifferent=pushDifferent

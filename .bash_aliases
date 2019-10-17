@@ -90,7 +90,7 @@ gclone(){
 	git clone $1;
 	cd "$(basename "$1" .git)"
 	repo=$(git config --get remote.origin.url)
-	echo -e "\nPlease set user email for $repo"
+	echo -e "\nPlease set user email for $repo (Defalt is $(git config user.email))"
 	read email
 	if [ $email ]; then
 		git config user.email $email

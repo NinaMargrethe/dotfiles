@@ -114,14 +114,16 @@ recursiveStash(){
 	fi
 
 	file=/tmp/recursiveStash
-	echo $(git stash list) > $file
+	echo $(git stash list --date=local) > $file
 	sed -i -e 's/\( \)\(stash@{\)/\n\2/g' $file
+	sed -i -e 's/stash@{/[/g' $file
+	sed -i -e 's/}/]/g' $file
 	#TODO: Coloring output
 	#sed -i -e 's/\(: \)\([a-zA-Z0-9]\{9\}\)/\1\[\e[0;33\2\[\033[00m\]/g' $file
 
 	i=0
 	while read line; do
-		echo $line
+		echo 'stash@{'$((i))'}'$line
 		git stash show stash@{$i}
 		echo $'\n'
 		i=$i+1

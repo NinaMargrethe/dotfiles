@@ -39,8 +39,23 @@ alias skiptest='-Dmaven.test.skip=true' # run as 'mvn skiptest'
 alias ggrep='git grep -in'
 #alias gtree='git log --oneline --decorate --all --graph'
 alias gtree='git log --oneline --decorate --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)"'
+## Check if branch is special branch based on name 
+isProtectedBranch() { 
+	branches="master develop dev main"
+	 if [[ $branches =~ (^|[[:space:]])"$1"($|[[:space:]]) ]] ; then
+	 	return 0
+	else
+		return 1
+	fi
+}
 ## Deletes multiple branches from local and remote
-deleteBranch(){ git branch -D $1; git push origin --delete $1; };
+deleteBranch(){
+	if isProtectedBranch ; then
+		echo "You should probably not delete $1"
+	else 
+		git branch -D $1; git push origin --delete $1;
+	fi
+}
 alias grm=deleteBranch
 alias fixpush='git config --global push.default current' #ffs.. -.-
 ## Reverts to commit and updates remote branch
@@ -61,4 +76,4 @@ gclone(){
 	fi	
 }
 alias gclone=gclone
-
+alias gweeklog='git log --author="<$(git config user.email)>" --since="5 days ago"'

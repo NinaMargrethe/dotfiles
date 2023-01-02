@@ -16,5 +16,9 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-PS1='\[\e[0;36m[\T]\[\e[0;35m nl\]:\e[m\]\[\e[0;32m$\e[m\e[0;93m\e[1;33m$(parse_git_branch)\[\033[00m\] '
-
+if [ ! -f ~/.host_alias ]; then                                                     
+    printf "Enter host alias: "                                                     
+    read host_alias                                                                 
+    echo $host_alias > .host_alias                                                  
+fi                                                                                  
+PS1='\[\e[0;36m[\T]\[\e[0;35m '$(<.host_alias)'\]:\e[m\]\[\e[0;32m$\e[m\e[0;93m\e[1;33m$(parse_git_branch)\[\033[00m\] '

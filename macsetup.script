@@ -1,3 +1,4 @@
+# system settings
 tell application "System Events"
 	tell property list file "~/Library/Preferences/com.apple.Terminal.plist"
 		set value of property list item "Shell" to "/bin/bash"
@@ -5,10 +6,12 @@ tell application "System Events"
 	end tell
 end tell
 
+# installs and dotfiles
 do shell script "/bin/bash -s <<'EOF'
-
+	# install brew
 	/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"
 
+	# indispensable tools
 	brew install wget
 	brew install vim
 	brew install gnu-sed # PATH=\"/usr/local/opt/gnu-sed/libexec/gnubin:$PATH\"
@@ -23,12 +26,12 @@ do shell script "/bin/bash -s <<'EOF'
 
 	source ~/.bash_profile
 
-  # devtools
-  brew install openjdk@17
-  brew install kotlin
-  brew tap hashicorp/tap; brew install hashicorp/tap/terraform
-  brew install terragrunt
-  brew install azure-cli
+	# devtools
+	brew install openjdk@17
+	brew install kotlin
+	brew tap hashicorp/tap; brew install hashicorp/tap/terraform
+	brew install terragrunt
+	brew install azure-cli
 EOF"
 
 

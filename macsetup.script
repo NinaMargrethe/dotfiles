@@ -1,8 +1,88 @@
 # system settings
 tell application "System Events"
+	# terminal
 	tell property list file "~/Library/Preferences/com.apple.Terminal.plist"
 		set value of property list item "Shell" to "/bin/bash"
 		set value of property list item "NewTabWorkingDirectoryBehavior" to "1"
+	end tell
+	# dock
+	tell property list file "~/Library/Preferences/com.apple.dock.plist"
+		set value of property list item "autohide" to "1"
+		set value of property list item "orientation" to "right"
+		set value of property list item "tilesize" to "16"
+		set value of property list item "launchanim" to "0"
+	end tell
+	# clock
+	tell property list file "~/Library/Preferences/com.apple.menuextra.clock.plist"
+		set value of property list item "FlashDateSeparators" to "0"
+		set value of property list item "IsAnalog" to "0"
+		set value of property list item "Show24Hour" to "1"
+		set value of property list item "ShowDate" to "0"
+		set value of property list item "ShowDayOfWeek" to "1"
+	end tell
+	# status icons
+	tell property list file "~/Library/Preferences/com.apple.controlcenter.plist"
+		set value of property list item "NSStatusItem Visible Battery" to "1"
+		set value of property list item "NSStatusItem Visible BentoBox" to "1"
+		set value of property list item "NSStatusItem Visible Bluetooth" to "1"
+		set value of property list item "NSStatusItem Visible Clock" to "1"
+		set value of property list item "NSStatusItem Visible NowPlaying" to "1"
+		set value of property list item "NSStatusItem Visible WiFi" to "1"
+		set value of property list item "NSStatusItem Visible Item-0" to "0"
+	end tell
+	# touch strip
+	tell property list file "~/Library/Preferences/com.apple.controlstrip.plist"
+		set value of property list item "FullCustomized" to "(
+        		\"com.apple.system.group.brightness\",
+        		\"com.apple.system.group.keyboard-brightness\",
+        		\"com.apple.system.group.media\",
+        		\"com.apple.system.group.volume\",
+        		\"com.apple.system.screen-lock\"
+    		)"
+		set value of property list item "MiniCustomized" to "(
+        		\"com.apple.system.brightness\",
+        		\"com.apple.system.volume\",
+        		\"com.apple.system.mute\",
+        		\"com.apple.system.screen-lock\"
+  		)"
+	end tell
+	# input languages
+	tell property list file "~/Library/Preferences/com.apple.HIToolbox.plist"
+		set value of property list item "AppleEnabledInputSources" to "(
+			{
+               		InputSourceKind = \"Keyboard Layout\";
+             			\"KeyboardLayout ID\" = 12;
+               		 \"KeyboardLayout Name\" = Norwegian;
+            		},
+			{
+				InputSourceKind = \"Keyboard Layout\";
+				\"KeyboardLayout ID\" = 0;
+				\"KeyboardLayout Name\" = \"U.S.\";
+			},
+			{
+				\"Bundle ID\" = \"com.apple.CharacterPaletteIM\";
+				InputSourceKind = \"Non Keyboard Input Method\";
+			},
+			{
+				\"Bundle ID\" = \"com.apple.inputmethod.EmojiFunctionRowItem\";
+				InputSourceKind = \"Non Keyboard Input Method\";
+			}
+		)"
+	end tell
+	tell property list file "~/Library/Preferences/com.apple.TextInputMenu.plist"
+		set value of property list item "visible" to "1"
+	end tell
+	tell property list file "~/Library/Preferences/com.apple.TextInputMenuAgent.plist"
+		set value of property list item "NSStatusItem Preferred Position Item-0" to "309"
+		set value of property list item "NSStatusItem Visible Item-0" to "1"
+	end tell
+	# TODO hotkeys
+	# f u Siri
+	tell property list file "~/Library/Preferences/com.apple.systemuiserver.plist"
+		set value of property list item "NSStatusItem Visible Siri" to "0"
+	end tell
+	tell property list file "~/Library/Preferences/com.apple.Siri.plist"
+		set value of property list item "StatusMenuVisible" to "0"
 	end tell
 end tell
 

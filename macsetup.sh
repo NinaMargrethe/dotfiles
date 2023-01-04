@@ -1,6 +1,10 @@
 # change default shell to bash
 chsh -s /bin/bash
 
+# set terminal profile preferences
+#defaults write com.apple.Terminal Shell "/bin/bash"
+#defaults write com.apple.Terminal "Startup Window Settings" Pro
+
 # install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 

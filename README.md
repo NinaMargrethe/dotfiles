@@ -8,9 +8,11 @@ dotfiles
 ## Aliases
 
 **rstash** - alias for recursive stash list with changelog (name only)
+
 ![Recursive stash with changelog](doc/img/rstash.png)
 
 **gtree** - git tree with color formatting
+
 ![](doc/img/gtree.png)
 
 ## macsetup.script

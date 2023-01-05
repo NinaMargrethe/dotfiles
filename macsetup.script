@@ -1,4 +1,5 @@
 # system settings
+display notification "Starting configuration" with title "macsetup"
 tell application "System Events"
 	# terminal
 	tell property list file "~/Library/Preferences/com.apple.Terminal.plist"
@@ -85,9 +86,12 @@ tell application "System Events"
 		set value of property list item "StatusMenuVisible" to "0"
 	end tell
 end tell
+display notification "Configuration complete" with title "macsetup"
+
 
 # installs and dotfiles
 do shell script "/bin/bash -s <<'EOF'
+	display notification "Installing brew and indispensable tools" with title "macsetup"
 	# install brew
 	/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"
 
@@ -98,14 +102,17 @@ do shell script "/bin/bash -s <<'EOF'
 	brew install node
 	brew install git
 
+	display notification "Fetching dotfiles" with title "macsetup"
 	# dotfiles
 	cd 
 	wget https://raw.githubusercontent.com/NinaMargrethe/dotfiles/master/.bash_aliases
 	wget https://raw.githubusercontent.com/NinaMargrethe/dotfiles/master/.bash_profile
 	wget https://raw.githubusercontent.com/NinaMargrethe/dotfiles/master/.vimrc
 
-	source ~/.bash_profile
-
+	#source ~/.bash_profile
+	display notification "Dotfiles in place" with title "macsetup"
+	
+	display notification "Installing developer tools" with title "macsetup"
 	# devtools
 	brew install openjdk@17
 	brew install kotlin
@@ -113,5 +120,7 @@ do shell script "/bin/bash -s <<'EOF'
 	brew install terragrunt
 	brew install azure-cli
 EOF"
+
+display notification "Configuration complete" with title "macsetup"
 
 

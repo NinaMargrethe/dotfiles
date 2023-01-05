@@ -17,7 +17,7 @@ dotfiles
 
 ## macsetup.script
 This script is tailored to my needs and preferences as a backend developer working on a Macbook.
-It uses osascript aka applascript, and should configure everything I need at the click of a button.
+It uses applascript, [Apples OSA-compliant scripting language](https://books.google.no/books?id=rW5k0w_wC3MC&lpg=PA133&dq=osascript%20exit%20statement&pg=PA9#v=onepage&q=osascript%20exit%20statement&f=false), and should configure everything I need at the click of a button.
 .script files runs in MacOS Script Editor, you'll need to build and run it maually from there. 
 The script provides only start- and end- outputs. Future: verificaton and checks. 
 

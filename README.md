@@ -24,3 +24,4 @@ The script provides no output as of yet.
 Clone and run at your own risk.
 
 [stephancasas](https://github.com/stephancasas) has provided a possibly [complete list of hotkey combinations](https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973) for reference if you want to edit your _com.apple.symbolichotkeys.plist_
+Alternatively you could use [Key Codes by manytricks](https://manytricks.com/keycodes) to log your own input details.

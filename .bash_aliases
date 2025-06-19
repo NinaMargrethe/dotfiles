@@ -157,3 +157,9 @@ branchLog(){
 	git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:yellow)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
 }                                                                                   
 alias branchlog=branchLog
+resetToUpstream(){
+    current=$(git branch | grep \* | cut -d " " -f2)
+    remote='origin/'$current
+    git reset $remote
+}
+alias greset=resetToUpstream

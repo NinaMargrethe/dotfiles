@@ -12,6 +12,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Setting up prompt
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -19,6 +20,16 @@ parse_git_branch() {
 if [ ! -f ~/.host_alias ]; then                                                     
     printf "Enter host alias: "                                                     
     read host_alias                                                                 
-    echo $host_alias > ~/.host_alias                                                  
+    echo $host_alias > ~/.host_alias
 fi                                                                                  
 PS1='\[\e[0;36m[\T]\[\e[0;35m '$(<~/.host_alias)'\]:\e[m\]\[\e[0;32m$\e[m\e[0;93m\e[1;33m$(parse_git_branch)\[\033[00m\] '
+
+# Check if homebrew is installed and on PATH
+if [ -f /opt/homebrew/bin/brew ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    export PATH=/opt/homebrew/bin:$PATH
+fi
+
+if [ -f ~/.gitconfig ]; then
+    gsetup
+fi

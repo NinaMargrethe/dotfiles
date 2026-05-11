@@ -63,6 +63,21 @@ alias mvn='mvn -T 1.5C' # mvn runs faster
 alias skiptest='-Dmaven.test.skip=true' # run as 'mvn skiptest'
 
 # Git aliases
+gitSetup() {
+    if [ -f ~/.gitconfig ]; then
+        read name
+        if [ $name ]; then
+            git config --global user.name $name
+            echo "Name set to $(git config user.name)"
+        fi
+        read email
+        if [ $email ]; then
+            git config--global  user.email $email
+            echo "Email set to $(git config user.email)"
+        fi
+    fi
+}
+alias gsetup=gitSetup
 alias ggrep='git grep -in'
 #alias gtree='git log --oneline --decorate --all --graph'
 alias gtree='git log --oneline --decorate --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)"'
@@ -158,8 +173,8 @@ branchLog(){
 }                                                                                   
 alias branchlog=branchLog
 resetToUpstream(){
-    current=$(git branch | grep \* | cut -d " " -f2)
-    remote='origin/'$current
-    git reset $remote
+	current=$(git branch | grep \* | cut -d " " -f2)
+	remote='origin/'$current
+	git reset $remote
 }
 alias greset=resetToUpstream

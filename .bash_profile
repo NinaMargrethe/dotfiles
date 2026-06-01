@@ -1,6 +1,7 @@
 #Allow color in terminal output
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
 # Alias definitions.

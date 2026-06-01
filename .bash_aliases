@@ -73,7 +73,7 @@ gitSetup() {
         fi
         read email
         if [ $email ]; then
-            git config--global  user.email $email
+            git config --global user.email $email
             echo "Email set to $(git config user.email)"
         fi
     fi

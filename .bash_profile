@@ -30,6 +30,6 @@ if [ -f /opt/homebrew/bin/brew ]; then
     export PATH=/opt/homebrew/bin:$PATH
 fi
 
-if [ -f ~/.gitconfig ]; then
+if [ ! -f ~/.gitconfig ]; then
     gsetup
 fi

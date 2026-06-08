@@ -21,6 +21,6 @@ echo -e "${P}   ######################  ${NC} %%%     %%%     %%  %%%%%%%%%% %%%
 echo -e "${P}    ####################   ${NC} %%%     %%%     %% %%%%    %%% %%%         %%%%        %%%%         %%%  "; 
 echo -e "${C}      ################     ${NC} %%%     %%%     %% %%%    %%%%  %%%%    %%  %%%%     %%%%%   %%    %%%%  "; 
 echo -e "${C}       ####     #####      ${NC} %%%     %%      %%  %%%%%%  %%    %%%%%%%%    %%%%%%%%%%    %%%%%%%%%%   "; 
-echo ""                                                                         
-echo -e $(sw_vers -productName) $(sw_vers -productVersion) $(uname -m)                      
-echo ""   
+echo ""
+echo -e $(sw_vers -productName) $(sw_vers -productVersion) $(uname -m) $(ipconfig getifaddr en0) $(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '"')
+echo ""

@@ -22,5 +22,9 @@ echo -e "${P}    ####################   ${NC} %%%     %%%     %% %%%%    %%% %%%
 echo -e "${C}      ################     ${NC} %%%     %%%     %% %%%    %%%%  %%%%    %%  %%%%     %%%%%   %%    %%%%  "; 
 echo -e "${C}       ####     #####      ${NC} %%%     %%      %%  %%%%%%  %%    %%%%%%%%    %%%%%%%%%%    %%%%%%%%%%   "; 
 echo ""
-echo -e $(sw_vers -productName) $(sw_vers -productVersion) $(uname -m) $(ipconfig getifaddr en0) $(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '"')
+printf "      %-21s %s %s %s\n" \
+  "$(sw_vers -productName) $(sw_vers -productVersion) $(uname -m)" \
+  "$(ifconfig en0 | awk '/ether/{print $2}')" \
+  "$(ipconfig getifaddr en0)" \
+  "$(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '"')"
 echo ""
